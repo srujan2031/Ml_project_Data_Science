@@ -1,5 +1,6 @@
 import sys
 import logging
+from src.logger import logging
 def error_message_detail(error, error_detail: sys):
     """
     This function is used to format the error message with details.
@@ -23,7 +24,8 @@ class CustomException(Exception):
         return self.error_message
 if __name__ == "__main__":
     try:
-        raise ValueError("An example error")
+        a=1/0
     except Exception as e:
-        logging.error(CustomException(e, sys))
+        logging.info("Division by zero error occurred")
+        raise CustomException(e, sys)
         print(CustomException(e, sys))
