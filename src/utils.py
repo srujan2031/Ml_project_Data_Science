@@ -45,3 +45,16 @@ def evaluate_models(X_train, y_train, X_test, y_test, models: dict, param: dict)
         except Exception as e:
             raise CustomException(e, sys)
     return report
+def load_object(file_path: str):
+    """
+    This function loads the object from a file.
+    """
+    try:
+        import joblib
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"File {file_path} does not exist.")
+        obj = joblib.load(file_path)
+        logging.info(f"Object loaded from {file_path}")
+        return obj
+    except Exception as e:
+        raise CustomException(e, sys)
