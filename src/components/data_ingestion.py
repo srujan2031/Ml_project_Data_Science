@@ -9,6 +9,8 @@ from dataclasses import dataclass
 from src.utils import save_object
 from src.components.data_transformation import DataTransformationConfig
 from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainerConfig
+from src.components.model_trainer import ModelTrainer
 @dataclass
 class DataIngestionConfig:
     train_data_path: str = os.path.join('artifacts', 'train.csv')
@@ -43,8 +45,15 @@ if __name__ == "__main__":
     train_data, test_data = obj.initiate_data_ingestion()
     print(f"Train data path: {train_data}")
     print(f"Test data path: {test_data}")
-    data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data, test_data)
-    
+    transformation = DataTransformation()
+    train_array, test_array, preprocessor_path = transformation.initiate_data_transformation(train_data, test_data)
+    print(f"Data transformed and preprocessor saved at: {preprocessor_path}")
+
+    # STEP 3: Model Training
+    trainer = ModelTrainer()
+    best_model_name,r2_score = trainer.initiate_model_trainer(train_array, test_array)
+    print(f"Best Model: {best_model_name}")
+    print(f"Best Model Path: {trainer.model_trainer_config.trained_model_file_path}")
+    print(f"Best Model R² Score: {r2_score}")
 
 
