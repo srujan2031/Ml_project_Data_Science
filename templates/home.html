@@ -101,9 +101,12 @@
 
             <button type="submit" class="btn btn-primary">Predict Math Score</button>
         </form>
-
         {% if results %}
-        <h2>Prediction: {{ results }}</h2>
+        <div class="alert alert-success text-center mt-4">
+            🎯 <strong>Predicted Math Score:</strong> {{ results }}
+        </div>
+        <a href="{{ url_for('predict_datapoint') }}" class="btn btn-secondary">🔄 Reset Form</a>
+        <a href="{{ url_for('home') }}" class="btn btn-outline-primary">🏠 Go Back to Home</a>
         {% endif %}
     </div>
 </body>
