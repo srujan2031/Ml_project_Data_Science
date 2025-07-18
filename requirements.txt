@@ -7,5 +7,5 @@ seaborn
 catboost
 xgboost
 gunicorn==21.2.0
-
+Flask
 #-e .
